@@ -1,0 +1,10 @@
+/vendor
+.idea/*
+/node_modules
+Homestead.yaml
+Homestead.json
+.env
+bower_components
+
+.docker/flarepoint-db/*
+/nbproject/private/
