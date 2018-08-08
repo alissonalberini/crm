@@ -117,6 +117,18 @@ $('body').click(function(e) {
                        class="list-group-item childlist">{{ __('New Indication') }}</a>
                 @endif
             </div>
+            
+            <a href="#imobiles" class=" list-group-item" data-toggle="collapse" data-parent="#MainMenu"><i
+                        class="sidebar-icon glyphicon glyphicon-list-alt"></i><span id="menu-txt">{{ __('Imobiles') }}</span>
+            <i class="ion-chevron-up  arrow-up sidebar-arrow"></i></a>
+            <div class="collapse" id="imobiles">
+                <a href="{{ route('imobiles.index')}}"
+                   class="list-group-item childlist">{{ __('All Imobiles') }}</a>
+                @if(Entrust::hasRole('administrator'))
+                    <a href="{{ route('imobiles.create')}}"
+                       class="list-group-item childlist">{{ __('New Imobile') }}</a>
+                @endif
+            </div>
 
             <a href="#tasks" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu"><i
                         class="glyphicon sidebar-icon glyphicon-tasks"></i><span id="menu-txt">{{ __('Tasks') }}</span>

@@ -10,7 +10,7 @@
 |
 */
 //Route::auth();
-//Auth::routes();
+Auth::routes();
 Route::get('/logout', 'Auth\LoginController@logout');
 Route::group(['middleware' => ['auth']], function () {
     
@@ -90,6 +90,15 @@ Route::group(['middleware' => ['auth']], function () {
      * Indications
      */
         Route::resource('indications', 'IndicationsController'); 
+        
+    /**
+     * Imobiles
+     */
+        Route::group(['prefix' => 'imobiles'], function () {
+            Route::get('/data', 'ImobilesController@anyData')->name('imobiles.data');
+            Route::post('/upload/{id}', 'DocumentsController@uploadImobile');
+        });
+        Route::resource('imobiles', 'ImobilesController');
 
     /**
      * Integrations

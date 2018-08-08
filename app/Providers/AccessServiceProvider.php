@@ -59,5 +59,9 @@ class AccessServiceProvider extends ServiceProvider
             \App\Repositories\Indication\IndicationRepositoryContract::class,
             \App\Repositories\Indication\IndicationRepository::class
         );
+        $this->app->bind(
+            \App\Repositories\Imobile\ImobileRepositoryContract::class,
+            \App\Repositories\Imobile\ImobileRepository::class
+        );
     }
 }

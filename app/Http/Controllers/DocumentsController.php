@@ -46,7 +46,37 @@ class DocumentsController extends Controller
             ['path' => "$filename", 'size' => "$totaltsize", 'file_display' => "$fileOrginal", 'client_id' => $id]
         );
         $document = Document::create($input);
-        Session::flash('flash_message', 'File successfully uploaded');
+        Session()->flash('flash_message', 'File  successfully uploaded');
+        return redirect()->back();
+    }
+    
+    
+    public function uploadImobile(Request $request, $id)
+    {
+        $settings = Setting::findOrFail(1);
+        $companyname = $settings->company;
+        if (!is_dir(public_path() . '/files/' . $companyname)) {
+            mkdir(public_path() . '/files/' . $companyname, 0777, true);
+        }
+        $file = $request->file('file');
+        $destinationPath = public_path() . '/files/' . $companyname;
+        $filename = str_random(8) . '_' . $file->getClientOriginalName();
+        $fileOrginal = $file->getClientOriginalName();
+        $file->move($destinationPath, $filename);
+        $size = $file->getClientSize();
+        $mbsize = $size / 1048576;
+        $totaltsize = substr($mbsize, 0, 4);
+        if ($totaltsize > 15) {
+            Session::flash('flash_message', 'File Size can not be bigger then 15MB');
+            return redirect()->back();
+        }
+        $input = array_replace(
+            $request->all(),
+            ['path' => "$filename", 'size' => "$totaltsize", 'file_display' => "$fileOrginal", 'imobile_id' => $id]
+        );
+        $document = Document::create($input);
+        Session()->flash('flash_message', 'File  successfully uploaded');
+        return redirect()->back();
     }
     /**
      * @param Request $request
